@@ -37,7 +37,7 @@ def messaging_events(payload):
     for event in messaging_events:
         if "message" in event and "text" in event["message"]:
             yield event["sender"]["id"], event["message"]["text"].encode('unicode_escape')
-        else if "messsage" in event and "mid" in event["message"]:
+        elif "messsage" in event and "mid" in event["message"]:
             yield event["sender"]["id"], event["message"]["mid"].encode('unicode_escape')
 
 
