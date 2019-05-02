@@ -24,7 +24,7 @@ def handle_messages():
     payload = request.get_data()
     print (payload)
     for sender, message in messaging_events(payload):
-        print ("Incoming from %s: %s") % (sender, message)
+        print ("Incoming from {}: {}".format(sender, message))
         send_message(PAT, sender, message)
     return "ok"
 
