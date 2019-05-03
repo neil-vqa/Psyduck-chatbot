@@ -1,11 +1,12 @@
 from flask import Flask, request
-import json
+import json, praw, os
 import requests
 
 app = Flask(__name__)
+reddit = praw.Reddit(client_id='iGMNdhNR4e_Atg',
+                    client_secret='xkuIbmiS2GHhNr-NkpmzPGRVYMI',
+                    user_agent='neilthegreatest')
 
-# This needs to be filled with the Page Access Token that will be provided
-# by the Facebook App that will be created.
 PAT = 'EAAfYtjnPepMBAAdaAA5we9NUZC4iELptzHwhY1ppFhBF6fYMW1UsxYmMRnllgldC04so2TNwWLdbZAOVbknoJHca1XoTwghiOFDjZB9paANUYO9Ks7GPlLPSZCwtrA30nmrVT5JWjWKX8BAlP1neorcuJkSPnszeKVNK6g3TKwZDZD'
 
 @app.route('/', methods=['GET'])
@@ -29,9 +30,6 @@ def handle_messages():
     return "ok"
 
 def messaging_events(payload):
-    """Generate tuples of (sender_id, message_text) from the
-    provided payload.
-    """
     data = json.loads(payload)
     messaging_events = data["entry"][0]["messaging"]
     for event in messaging_events:
@@ -42,18 +40,46 @@ def messaging_events(payload):
 
 
 def send_message(token, recipient, text):
-    """Send the message text to recipient with id recipient.
-    """
-
+    if "shower" in text.lower():
+        subreddit_name = "Showerthoughts"
+    elif "joke" in text.lower():
+        subreddit_name = "Jokes"
+    else:
+        r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+            params={"access_token": token},
+            data=json.dumps({
+                "recipient": {"id": recipient},
+                "message": {"text": text.decode('unicode_escape')}
+            }),
+            headers={'Content-type': 'application/json'})
+        if r.status_code != requests.codes.ok:
+            print (r.text)
+            
+    if subreddit_name == "Showerthoughts":
+        for submission in reddit.subreddit(subreddit_name).hot(limit=None):
+            payload = submission.url
+            break
+            
     r = requests.post("https://graph.facebook.com/v2.6/me/messages",
-        params={"access_token": token},
-        data=json.dumps({
-            "recipient": {"id": recipient},
-            "message": {"text": text.decode('unicode_escape')}
-        }),
-        headers={'Content-type': 'application/json'})
-    if r.status_code != requests.codes.ok:
-        print (r.text)
-
+            params={"access_token": token},
+            data=json.dumps({
+                "recipient": {"id": recipient},
+                "message": {"text": payload}
+            }),
+            headers={'Content-type': 'application/json'})
+    
+    elif subreddit_name == "Jokes":
+        for submission in reddit.subreddit(subreddit_name).hot(limit=None):
+            payload = submission.url
+            break
+            
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+            params={"access_token": token},
+            data=json.dumps({
+                "recipient": {"id": recipient},
+                "message": {"text": payload}
+            }),
+            headers={'Content-type': 'application/json'})
+           
 if __name__ == '__main__':
     app.run()
