@@ -40,9 +40,9 @@ def messaging_events(payload):
 
 
 def send_message(token, recipient, text):
-    if "shower" in text.lower():
+    if "shower" in text:
         subreddit_name = "Showerthoughts"
-    elif "joke" in text.lower():
+    elif "joke" in text:
         subreddit_name = "Jokes"
     else:
         r = requests.post("https://graph.facebook.com/v2.6/me/messages",
