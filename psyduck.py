@@ -1,11 +1,8 @@
 from flask import Flask, request
-import json, praw, os
+import json
 import requests
 
 app = Flask(__name__)
-reddit = praw.Reddit(client_id='iGMNdhNR4e_Atg',
-                    client_secret='xkuIbmiS2GHhNr-NkpmzPGRVYMI',
-                    user_agent='neilthegreatest')
 
 PAT = 'EAAfYtjnPepMBAAdaAA5we9NUZC4iELptzHwhY1ppFhBF6fYMW1UsxYmMRnllgldC04so2TNwWLdbZAOVbknoJHca1XoTwghiOFDjZB9paANUYO9Ks7GPlLPSZCwtrA30nmrVT5JWjWKX8BAlP1neorcuJkSPnszeKVNK6g3TKwZDZD'
 
@@ -38,37 +35,7 @@ def messaging_events(payload):
         elif "messsage" in event and "mid" in event["message"]:
             yield event["sender"]["id"], event["message"]["mid"].encode('unicode_escape')
 
-
-def send_message(token, recipient, text):
-    if "shower".encode('unicode_escape') in text:
-        subreddit_name = "Showerthoughts"
-        for submission in reddit.subreddit(subreddit_name).hot(limit=None):
-            payload = submission.url
-            break
-            
-    r = requests.post("https://graph.facebook.com/v2.6/me/messages",
-            params={"access_token": token},
-            data=json.dumps({
-                "recipient": {"id": recipient},
-                "message": {"text": payload}
-            }),
-            headers={'Content-type': 'application/json'})
-    
-    if "joke".encode('unicode_escape') in text:
-        subreddit_name = "Jokes"
-        for submission in reddit.subreddit(subreddit_name).hot(limit=None):
-            payload = submission.url
-            break
-            
-    r = requests.post("https://graph.facebook.com/v2.6/me/messages",
-            params={"access_token": token},
-            data=json.dumps({
-                "recipient": {"id": recipient},
-                "message": {"text": payload}
-            }),
-            headers={'Content-type': 'application/json'})
-        
-    
+def send_message(token, recipient, text)
     r = requests.post("https://graph.facebook.com/v2.6/me/messages",
         params={"access_token": token},
         data=json.dumps({
@@ -78,8 +45,6 @@ def send_message(token, recipient, text):
         headers={'Content-type': 'application/json'})
     if r.status_code != requests.codes.ok:
         print (r.text)
-            
-   
-           
+                
 if __name__ == '__main__':
     app.run()
