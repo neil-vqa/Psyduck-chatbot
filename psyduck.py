@@ -54,7 +54,7 @@ def send_message(token, recipient, text):
             }),
             headers={'Content-type': 'application/json'})
     
-    elif "joke".encode('unicode_escape') in text:
+    if "joke".encode('unicode_escape') in text:
         subreddit_name = "Jokes"
         for submission in reddit.subreddit(subreddit_name).hot(limit=None):
             payload = submission.url
