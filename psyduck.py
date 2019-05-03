@@ -68,7 +68,7 @@ def send_message(token, recipient, text):
             }),
             headers={'Content-type': 'application/json'})
     
-    elif subreddit_name == "Jokes":
+    if subreddit_name == "Jokes":
         for submission in reddit.subreddit(subreddit_name).hot(limit=None):
             payload = submission.url
             break
