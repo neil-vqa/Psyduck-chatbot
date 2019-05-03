@@ -32,8 +32,8 @@ def messaging_events(payload):
     for event in messaging_events:
         if "message" in event and "text" in event["message"]:
             yield event["sender"]["id"], event["message"]["text"].encode('unicode_escape')
-        elif "messsage" in event and "mid" in event["message"]:
-            yield event["sender"]["id"], event["message"]["mid"].encode('unicode_escape')
+        elif "messsage" in event and "sticker_id" in event["message"]:
+            yield event["sender"]["id"], 'Wala ko kasabot'.encode('unicode_escape')
 
 def send_message(token, recipient, text):
     r = requests.post("https://graph.facebook.com/v2.6/me/messages",
