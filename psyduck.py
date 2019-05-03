@@ -35,7 +35,7 @@ def messaging_events(payload):
         elif "messsage" in event and "mid" in event["message"]:
             yield event["sender"]["id"], event["message"]["mid"].encode('unicode_escape')
 
-def send_message(token, recipient, text)
+def send_message(token, recipient, text):
     r = requests.post("https://graph.facebook.com/v2.6/me/messages",
         params={"access_token": token},
         data=json.dumps({
