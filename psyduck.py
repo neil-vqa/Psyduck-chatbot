@@ -1,8 +1,12 @@
+
 from flask import Flask, request
-import json
-import requests
+import json, praw
+import requests, random
 
 app = Flask(__name__)
+reddit = praw.Reddit(client_id='iGMNdhNR4e_Atg',
+                    client_secret='xkuIbmiS2GHhNr-NkpmzPGRVYMI',
+                    user_agent='web:psyduck-chatbot.herokuapp.com:v1.0 (by /u/neilthegreatest)')
 
 PAT = 'EAAfYtjnPepMBAAdaAA5we9NUZC4iELptzHwhY1ppFhBF6fYMW1UsxYmMRnllgldC04so2TNwWLdbZAOVbknoJHca1XoTwghiOFDjZB9paANUYO9Ks7GPlLPSZCwtrA30nmrVT5JWjWKX8BAlP1neorcuJkSPnszeKVNK6g3TKwZDZD'
 
@@ -36,15 +40,30 @@ def messaging_events(payload):
             yield event["sender"]["id"], 'Wala ko kasabot'.encode('unicode_escape')
 
 def send_message(token, recipient, text):
-    r = requests.post("https://graph.facebook.com/v2.6/me/messages",
-        params={"access_token": token},
-        data=json.dumps({
-            "recipient": {"id": recipient},
-            "message": {"text": text.decode('unicode_escape')}
-        }),
-        headers={'Content-type': 'application/json'})
-    if r.status_code != requests.codes.ok:
-        print (r.text)
+    if "shower" == text.decode('unicode_escape'):
+        shower = []
+        for submission in reddit.subreddit('Showerthoughts').hot(limit=10):
+            shower.append(submission.title)
+        payload = random.choice(shower)
+        
+        r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+            params={"access_token": token},
+            data=json.dumps({
+                "recipient": {"id": recipient},
+                "message": {"text": payload}
+            }),
+            headers={'Content-type': 'application/json'})
+    
+    else:
+        r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+            params={"access_token": token},
+            data=json.dumps({
+                "recipient": {"id": recipient},
+                "message": {"text": text.decode('unicode_escape')}
+            }),
+            headers={'Content-type': 'application/json'})
+        if r.status_code != requests.codes.ok:
+            print (r.text)
                 
 if __name__ == '__main__':
     app.run()
