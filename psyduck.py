@@ -42,20 +42,6 @@ def messaging_events(payload):
 def send_message(token, recipient, text):
     if "shower".encode('unicode_escape') in text:
         subreddit_name = "Showerthoughts"
-    elif "joke".encode('unicode_escape') in text:
-        subreddit_name = "Jokes"
-    else:
-        r = requests.post("https://graph.facebook.com/v2.6/me/messages",
-            params={"access_token": token},
-            data=json.dumps({
-                "recipient": {"id": recipient},
-                "message": {"text": text.decode('unicode_escape')}
-            }),
-            headers={'Content-type': 'application/json'})
-        if r.status_code != requests.codes.ok:
-            print (r.text)
-            
-    if subreddit_name == "Showerthoughts":
         for submission in reddit.subreddit(subreddit_name).hot(limit=None):
             payload = submission.url
             break
@@ -68,7 +54,8 @@ def send_message(token, recipient, text):
             }),
             headers={'Content-type': 'application/json'})
     
-    if subreddit_name == "Jokes":
+    elif "joke".encode('unicode_escape') in text:
+        subreddit_name = "Jokes"
         for submission in reddit.subreddit(subreddit_name).hot(limit=None):
             payload = submission.url
             break
@@ -80,6 +67,19 @@ def send_message(token, recipient, text):
                 "message": {"text": payload}
             }),
             headers={'Content-type': 'application/json'})
+        
+    else:
+        r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+            params={"access_token": token},
+            data=json.dumps({
+                "recipient": {"id": recipient},
+                "message": {"text": text.decode('unicode_escape')}
+            }),
+            headers={'Content-type': 'application/json'})
+        if r.status_code != requests.codes.ok:
+            print (r.text)
+            
+   
            
 if __name__ == '__main__':
     app.run()
