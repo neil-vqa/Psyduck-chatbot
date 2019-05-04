@@ -39,20 +39,66 @@ def messaging_events(payload):
         elif "messsage" in event and "mid" in event["message"]:
             yield event["sender"]["id"], 'Wala ko kasabot'.encode('unicode_escape')
 
-def send_message(token, recipient, text):
-    if "shower" == text.decode('unicode_escape'):
-        shower = []
-        for submission in reddit.subreddit('Showerthoughts').hot(limit=10):
-            shower.append(submission.title)
-        payload = random.choice(shower)
-        
-        r = requests.post("https://graph.facebook.com/v2.6/me/messages",
-            params={"access_token": token},
+def post_this(gold, receiver, load):
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+            params={"access_token": gold},
             data=json.dumps({
-                "recipient": {"id": recipient},
-                "message": {"text": payload}
+                "recipient": {"id": receiver},
+                "message": {"text": load}
             }),
             headers={'Content-type': 'application/json'})
+    
+hi_ls = ['Hi','Hello','hi','hello','Hey']
+help_ls = ['Help','help']
+mixed_ls = ['gwapo ko','gwapa ko']
+word_list1 = ['Wat u think?','Tell me more','Speak','Hoy','Oy','Tell me']
+word_list2 = ['Life tip','life tip']
+word_list3 = ['Tell me a quote','Quote','Give a quote']
+word_list4 = ['World news','world news']
+            
+def send_message(token, recipient, text):
+    if text.decode('unicode_escape') in hi_ls:
+        payload = "Psyduck? Yes I am Psyduck. Let me help you! Type Help to learn my keywords."
+        post_this(token, recipient, payload)
+    
+    elif text.decode('unicode_escape') in help_ls:
+        payload = "These are the keywords you can type so that I can interact with you well! \n Tell me a quote \n Wat u think? \n World news \n Life tip"
+        post_this(token, recipient, payload)
+
+    elif text.decode('unicode_escape') in mixed_ls:
+        payload = "yuck"
+        post_this(token, recipient, payload)
+
+    elif text.decode('unicode_escape') in word_list1:
+        shower = []
+        for submission in reddit.subreddit('Showerthoughts+explainlikeimfive+todayilearned').hot(limit=20):
+            shower.append(submission.title)
+        payload = random.choice(shower)
+        post_this(token, recipient, payload)
+    
+    elif text.decode('unicode_escape') in word_list2:
+        lifer = []
+        for submission in reddit.subreddit('LifeProTips').hot(limit=20):
+            lifer.append(submission.title)
+        payload = random.choice(lifer)
+        post_this(token, recipient, payload)
+
+    elif text.decode('unicode_escape') in word_list3:
+        quoter = []
+        for submission in reddit.subreddit('QuotesPorn').hot(limit=20):
+            quoter.append(submission.title)
+        payload = random.choice(quoter)
+        post_this(token, recipient, payload)
+
+    elif text.decode('unicode_escape') in word_list4:
+        newser = []
+        for submission in reddit.subreddit('worldnews').hot(limit=20):
+            newt = submission.title
+            newu = '  (LINK)  ' + submission.url
+            newf = newt + newu
+            newser.append(newf)
+        payload = random.choice(newser)
+        post_this(token, recipient, payload)
     
     else:
         r = requests.post("https://graph.facebook.com/v2.6/me/messages",
