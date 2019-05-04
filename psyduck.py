@@ -50,11 +50,13 @@ def post_this(gold, receiver, load):
     
 hi_ls = ['Hi','Hello','hi','hello','Hey']
 help_ls = ['Help','help']
-mixed_ls = ['gwapo ko','gwapa ko']
+mixed_ls = ['Gwapo ko','Gwapa ko']
+eat_ls = ['Where to eat?','Suggest food','Recommend food']
+movie_ls = ['Suggest movie','Recommend movie','What to watch?']
 word_list1 = ['Wat u think?','Tell me more','Speak','Hoy','Oy','Tell me']
-word_list2 = ['Life tip','life tip']
+word_list2 = ['Life tip','life tip','Tip']
 word_list3 = ['Tell me a quote','Quote','Give a quote']
-word_list4 = ['World news','world news']
+word_list4 = ['World news','world news','news']
             
 def send_message(token, recipient, text):
     if text.decode('unicode_escape') in hi_ls:
@@ -66,7 +68,27 @@ def send_message(token, recipient, text):
         post_this(token, recipient, payload)
 
     elif text.decode('unicode_escape') in mixed_ls:
-        payload = "yuck"
+        mixed_res = ['yuck','Yes you are...that is compared with monkeys','char']
+        payload = random.choice(mixed_res)
+        post_this(token, recipient, payload)
+        
+    elif text.decode('unicode_escape') in eat_ls:
+        eat_res = ['Jollibee','Mcdo','KFC','Mang Inasal','Greenwich','Yellow Cab','S&R','Carenderia','BBQ','kwek-kwek','Bibimbap','Bulgogi','Donut','Ramen','Sushi','Lechon']
+        payload = random.choice(eat_res)
+        post_this(token, recipient, payload)
+        
+    elif text.decode('unicode_escape') in movie_ls:
+        url = "https://api.themoviedb.org/3/trending/movie/day?api_key=dbc5a5e4384cceeced1c90779da712da"
+        data_res = "{}"
+        response = requests.request("GET", url, data=data_res)
+        top_mov = json.loads(response.text)
+        movlis = []
+        for movie in top_mov['results']:
+            title = movie['title']
+            overview = '  (OVERVIEW)  ' + movie['overview']
+            desc = title + overview
+            movlis.append(desc)
+        payload = random.choice(movlis)
         post_this(token, recipient, payload)
 
     elif text.decode('unicode_escape') in word_list1:
