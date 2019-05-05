@@ -56,19 +56,19 @@ movie_ls = ['Suggest movie','Recommend movie','What to watch?']
 word_list1 = ['Wat u think?','Tell me more','Speak','Hoy','Oy','Tell me']
 word_list2 = ['Life tip','life tip','Tip']
 word_list3 = ['Tell me a quote','Quote','Give a quote']
-word_list4 = ['World news','world news','news']
+word_list4 = ['World news','world news','news','News']
             
 def send_message(token, recipient, text):
     if text.decode('unicode_escape') in hi_ls:
-        payload = "Psyduck? Yes I am Psyduck. Let me help you! Type Help to learn my keywords."
+        payload = "Psyduck? Yes I am Psyduck. Let me help you! Type 'Help' to learn some of my keywords."
         post_this(token, recipient, payload)
     
     elif text.decode('unicode_escape') in help_ls:
-        payload = "These are the keywords you can type so that I can interact with you well! \n Tell me a quote \n Wat u think? \n World news \n Life tip"
+        payload = "These are some of the keywords you can type so that I can interact with you well! \n Tell me a quote \n Wat u think? \n World news \n Life tip"
         post_this(token, recipient, payload)
 
     elif text.decode('unicode_escape') in mixed_ls:
-        mixed_res = ['yuck','Yes you are...that is compared with monkeys','char']
+        mixed_res = ['yuck','Yes you are...that is compared with jinx','char']
         payload = random.choice(mixed_res)
         post_this(token, recipient, payload)
         
@@ -93,28 +93,28 @@ def send_message(token, recipient, text):
 
     elif text.decode('unicode_escape') in word_list1:
         shower = []
-        for submission in reddit.subreddit('Showerthoughts+explainlikeimfive+todayilearned').hot(limit=20):
+        for submission in reddit.subreddit('Showerthoughts+explainlikeimfive+todayilearned').hot(limit=30):
             shower.append(submission.title)
         payload = random.choice(shower)
         post_this(token, recipient, payload)
     
     elif text.decode('unicode_escape') in word_list2:
         lifer = []
-        for submission in reddit.subreddit('LifeProTips').hot(limit=20):
+        for submission in reddit.subreddit('LifeProTips').hot(limit=30):
             lifer.append(submission.title)
         payload = random.choice(lifer)
         post_this(token, recipient, payload)
 
     elif text.decode('unicode_escape') in word_list3:
         quoter = []
-        for submission in reddit.subreddit('QuotesPorn').hot(limit=20):
+        for submission in reddit.subreddit('QuotesPorn').hot(limit=30):
             quoter.append(submission.title)
         payload = random.choice(quoter)
         post_this(token, recipient, payload)
 
     elif text.decode('unicode_escape') in word_list4:
         newser = []
-        for submission in reddit.subreddit('worldnews').hot(limit=20):
+        for submission in reddit.subreddit('worldnews').hot(limit=30):
             newt = submission.title
             newu = '  (LINK)  ' + submission.url
             newf = newt + newu
