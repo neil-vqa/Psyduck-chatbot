@@ -125,7 +125,7 @@ def send_message(token, recipient, text):
         
     elif text.decode('unicode_escape') in word_list5:
         awwer = []
-        for submission in reddit.subreddit('aww').hot(limit=5):
+        for submission in reddit.subreddit('aww').hot(limit=30):
             if (submission.link_flair_css_class == 'image') or ((submission.is_self != True) and ((".jpg" in submission.url) or (".png" in submission.url))):
                 awwer.append(submission.url)
         payload = random.choice(awwer)
