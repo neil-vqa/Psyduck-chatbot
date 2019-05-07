@@ -48,6 +48,19 @@ def post_this(gold, receiver, load):
             }),
             headers={'Content-type': 'application/json'})
     
+def post_pic(silver, sentto, picload):
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+            params={"access_token": silver},
+            data=json.dumps({
+                "recipient": {"id": sentto},
+                "message": {"attachment": {
+                              "type": "image",
+                              "payload": {
+                                "url": picload
+                              }}}
+            }),
+            headers={'Content-type': 'application/json'})
+    
 hi_ls = ['Hi','Hello','hi','hello','Hey']
 help_ls = ['Help','help']
 mixed_ls = ['Gwapo ko','Gwapa ko']
@@ -58,6 +71,8 @@ word_list2 = ['Life tip','life tip','Tip']
 word_list3 = ['Tell me a quote','Quote','Give a quote']
 word_list4 = ['World news','world news','news','News']
 word_list5 = ['Aww','Cute','Cutie']
+word_list6 = ['Send pic','Pic pls']
+word_list7 = ['Meme','Give meme']
             
 def send_message(token, recipient, text):
     if text.decode('unicode_escape') in hi_ls:
@@ -129,17 +144,23 @@ def send_message(token, recipient, text):
             if (submission.link_flair_css_class == 'image') or ((submission.is_self != True) and ((".jpg" in submission.url) or (".png" in submission.url))):
                 awwer.append(submission.url)
         payload = random.choice(awwer)
-        r = requests.post("https://graph.facebook.com/v2.6/me/messages",
-            params={"access_token": token},
-            data=json.dumps({
-                "recipient": {"id": recipient},
-                "message": {"attachment": {
-                              "type": "image",
-                              "payload": {
-                                "url": payload
-                              }}}
-            }),
-            headers={'Content-type': 'application/json'})
+        post_pic(token, recipient, payload)
+
+    elif text.decode('unicode_escape') in word_list6:
+        picker = []
+        for submission in reddit.subreddit('pics').top(time_filter='day', limit=30):
+            if (submission.link_flair_css_class == 'image') or ((submission.is_self != True) and ((".jpg" in submission.url) or (".png" in submission.url))):
+                picker.append(submission.url)
+        payload = random.choice(picker)
+        post_pic(token, recipient, payload)
+
+    elif text.decode('unicode_escape') in word_list7:
+        memer = []
+        for submission in reddit.subreddit('wholesomememes').top(time_filter='day', limit=30):
+            if (submission.link_flair_css_class == 'image') or ((submission.is_self != True) and ((".jpg" in submission.url) or (".png" in submission.url))):
+                memer.append(submission.url)
+        payload = random.choice(memer)
+        post_pic(token, recipient, payload)
     
     else:
         r = requests.post("https://graph.facebook.com/v2.6/me/messages",
