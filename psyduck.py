@@ -57,6 +57,7 @@ word_list1 = ['Wat u think?','Tell me more','Speak','Hoy','Oy','Tell me']
 word_list2 = ['Life tip','life tip','Tip']
 word_list3 = ['Tell me a quote','Quote','Give a quote']
 word_list4 = ['World news','world news','news','News']
+word_list5 = ['Aww','Cute','Cutie']
             
 def send_message(token, recipient, text):
     if text.decode('unicode_escape') in hi_ls:
@@ -121,6 +122,24 @@ def send_message(token, recipient, text):
             newser.append(newf)
         payload = random.choice(newser)
         post_this(token, recipient, payload)
+        
+    elif text.decode('unicode_escape') in word_list5:
+        awwer = []
+        for submission in reddit.subreddit('aww').hot(limit=5):
+            if (submission.link_flair_css_class == 'image') or ((submission.is_self != True) and ((".jpg" in submission.url) or (".png" in submission.url))):
+                awwer.append(submission.url)
+        payload = random.choice(awwer)
+        r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+            params={"access_token": token},
+            data=json.dumps({
+                "recipient": {"id": recipient},
+                "message": {"attachment": {
+                              "type": "image",
+                              "payload": {
+                                "url": payload
+                              }}}
+            }),
+            headers={'Content-type': 'application/json'})
     
     else:
         r = requests.post("https://graph.facebook.com/v2.6/me/messages",
