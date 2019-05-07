@@ -72,7 +72,7 @@ word_list3 = ['Tell me a quote','Quote','Give a quote']
 word_list4 = ['World news','world news','news','News']
 word_list5 = ['Aww','Cute','Cutie']
 word_list6 = ['Send pic','Pic pls']
-word_list7 = ['Meme','Give meme']
+word_list7 = ['TWICE','twice','Twice']
             
 def send_message(token, recipient, text):
     if text.decode('unicode_escape') in hi_ls:
@@ -140,7 +140,7 @@ def send_message(token, recipient, text):
         
     elif text.decode('unicode_escape') in word_list5:
         awwer = []
-        for submission in reddit.subreddit('aww').hot(limit=30):
+        for submission in reddit.subreddit('aww').hot(limit=50):
             if (submission.link_flair_css_class == 'image') or ((submission.is_self != True) and ((".jpg" in submission.url) or (".png" in submission.url))):
                 awwer.append(submission.url)
         payload = random.choice(awwer)
@@ -148,18 +148,18 @@ def send_message(token, recipient, text):
 
     elif text.decode('unicode_escape') in word_list6:
         picker = []
-        for submission in reddit.subreddit('pics').top(time_filter='day', limit=30):
+        for submission in reddit.subreddit('pics+EarthPorn').top(time_filter='day', limit=30):
             if (submission.link_flair_css_class == 'image') or ((submission.is_self != True) and ((".jpg" in submission.url) or (".png" in submission.url))):
                 picker.append(submission.url)
         payload = random.choice(picker)
         post_pic(token, recipient, payload)
 
     elif text.decode('unicode_escape') in word_list7:
-        memer = []
-        for submission in reddit.subreddit('wholesomememes').top(time_filter='day', limit=30):
+        once = []
+        for submission in reddit.subreddit('twice').top(time_filter='day', limit=30):
             if (submission.link_flair_css_class == 'image') or ((submission.is_self != True) and ((".jpg" in submission.url) or (".png" in submission.url))):
-                memer.append(submission.url)
-        payload = random.choice(memer)
+                once.append(submission.url)
+        payload = random.choice(once)
         post_pic(token, recipient, payload)
     
     else:
