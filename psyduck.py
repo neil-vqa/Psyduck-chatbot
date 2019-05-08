@@ -66,12 +66,12 @@ help_ls = ['Help','help']
 mixed_ls = ['Gwapo ko','Gwapa ko']
 eat_ls = ['Where to eat?','Suggest food','Recommend food']
 movie_ls = ['Suggest movie','Recommend movie','What to watch?']
-word_list1 = ['Wat u think?','Tell me more','Speak','Hoy','Oy','Tell me']
-word_list2 = ['Life tip','life tip','Tip']
-word_list3 = ['Tell me a quote','Quote','Give a quote']
+word_list1 = ['Wat u think?','Tell me more','Speak','Hoy','Oy','Tell me','wat u think?']
+word_list2 = ['Life tip','life tip','Tip','tip']
+word_list3 = ['Tell me a quote','Quote','Give a quote','quote']
 word_list4 = ['World news','world news','news','News']
-word_list5 = ['Aww','Cute','Cutie']
-word_list6 = ['Send pic','Pic pls']
+word_list5 = ['Aww','Cute','Cutie','Awww','aww','cute']
+word_list6 = ['Send pic','Pic pls','Pic']
 word_list7 = ['TWICE','twice','Twice']
             
 def send_message(token, recipient, text):
@@ -150,9 +150,16 @@ def send_message(token, recipient, text):
         picker = []
         for submission in reddit.subreddit('pics+EarthPorn').top(time_filter='day', limit=30):
             if (submission.link_flair_css_class == 'image') or ((submission.is_self != True) and ((".jpg" in submission.url) or (".png" in submission.url))):
-                picker.append(submission.url)
-        payload = random.choice(picker)
-        post_pic(token, recipient, payload)
+                pict = {
+                    "title": submission.title,
+                    "p_url": submission.url
+                }
+                picker.append(pict)
+        payloader = random.choice(picker)
+        payload1 = payloader['p_url']
+        post_pic(token, recipient, payload1)
+        payload2 = payloader['title']
+        post_this(token, recipient, payload2)
 
     elif text.decode('unicode_escape') in word_list7:
         once = []
