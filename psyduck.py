@@ -66,7 +66,7 @@ help_ls = ['Help','help']
 mixed_ls = ['Gwapo ko','Gwapa ko']
 eat_ls = ['Where to eat?','Suggest food','Recommend food']
 movie_ls = ['Suggest movie','Recommend movie','What to watch?']
-word_list1 = ['Wat u think?','Tell me more','Speak','Hoy','Oy','Tell me','wat u think?']
+word_list1 = ['Wat u think?','Tell me more','Speak','Hoy','Oy','Tell me','wat u think?','Bored']
 word_list2 = ['Life tip','life tip','Tip','tip']
 word_list3 = ['Tell me a quote','Quote','Give a quote','quote']
 word_list4 = ['World news','world news','news','News']
@@ -142,9 +142,16 @@ def send_message(token, recipient, text):
         awwer = []
         for submission in reddit.subreddit('aww').hot(limit=50):
             if (submission.link_flair_css_class == 'image') or ((submission.is_self != True) and ((".jpg" in submission.url) or (".png" in submission.url))):
-                awwer.append(submission.url)
-        payload = random.choice(awwer)
-        post_pic(token, recipient, payload)
+                pict = {
+                    "title": submission.title,
+                    "p_url": submission.url
+                }
+                awwer.append(pict)
+        payloader = random.choice(awwer)
+        payload1 = payloader['p_url']
+        post_pic(token, recipient, payload1)
+        payload2 = payloader['title']
+        post_this(token, recipient, payload2)
 
     elif text.decode('unicode_escape') in word_list6:
         picker = []
