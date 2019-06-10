@@ -73,6 +73,8 @@ word_list4 = ['World news','world news','news','News']
 word_list5 = ['Aww','Cute','Cutie','Awww','aww','cute']
 word_list6 = ['Send pic','Pic pls','Pic']
 word_list7 = ['TWICE','twice','Twice']
+word_list8 = ['Science', 'science', 'Tell me some science']
+word_list9 = ['Meme','meme','give meme','Give meme']
             
 def send_message(token, recipient, text):
     if text.decode('unicode_escape') in hi_ls:
@@ -176,6 +178,31 @@ def send_message(token, recipient, text):
                 once.append(submission.url)
         payload = random.choice(once)
         post_pic(token, recipient, payload)
+        
+    elif text.decode('unicode_escape') in word_list8:
+        scientist = []
+        for submission in reddit.subreddit('science').top(time_filter='week', limit=30):
+            sciencet = submission.title
+            scienceu = '  (LINK)  ' + submission.url
+            sciencef = sciencet + scienceu
+            scientist.append(sciencef)
+        payload = random.choice(scientist)
+        post_this(token, recipient, payload)
+        
+    elif text.decode('unicode_escape') in word_list9:
+        memer = []
+        for submission in reddit.subreddit('AdviceAnimals').top(time_filter='week', limit=40):
+            if (submission.link_flair_css_class == 'image') or ((submission.is_self != True) and ((".jpg" in submission.url) or (".png" in submission.url))):
+                pict = {
+                    "title": submission.title,
+                    "p_url": submission.url
+                }
+                memer.append(pict)
+        payloader = random.choice(memer)
+        payload2 = payloader['title']
+        post_this(token, recipient, payload2)
+        payload1 = payloader['p_url']
+        post_pic(token, recipient, payload1)
     
     else:
         r = requests.post("https://graph.facebook.com/v2.6/me/messages",
