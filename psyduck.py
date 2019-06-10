@@ -124,9 +124,10 @@ def send_message(token, recipient, text):
     elif text.decode('unicode_escape') in word_list3:
         quoter = []
         for submission in reddit.subreddit('QuotesPorn').hot(limit=30):
-            quoter.append(submission.title)
+            if (submission.link_flair_css_class == 'image') or ((submission.is_self != True) and ((".jpg" in submission.url) or (".png" in submission.url))):
+                quoter.append(submission.url)
         payload = random.choice(quoter)
-        post_this(token, recipient, payload)
+        post_pic(token, recipient, payload)
 
     elif text.decode('unicode_escape') in word_list4:
         newser = []
