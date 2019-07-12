@@ -232,7 +232,7 @@ def send_message(token, recipient, text):
         
     elif text.decode('unicode_escape') in word_list9:
         memer = []
-        for submission in reddit.subreddit('AdviceAnimals').top(time_filter='week', limit=40):
+        for submission in reddit.subreddit('AdviceAnimals+funny').hot(limit=70):
             if (submission.link_flair_css_class == 'image') or ((submission.is_self != True) and ((".jpg" in submission.url) or (".png" in submission.url))):
                 pict = {
                     "title": submission.title,
