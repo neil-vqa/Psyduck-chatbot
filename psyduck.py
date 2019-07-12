@@ -77,6 +77,7 @@ def post_carousel(bronze, viewer, template):
                        {
                         "title": template[0]['title'],
                         "image_url": template[0]['poster'],
+                        "subtitle": template[0]['overview'],
                         "buttons":[
                               {
                                 "type":"web_url",
@@ -88,6 +89,7 @@ def post_carousel(bronze, viewer, template):
                       {
                         "title": template[1]['title'],
                         "image_url": template[1]['poster'],
+                        "subtitle": template[1]['overview'],
                         "buttons":[
                               {
                                 "type":"web_url",
@@ -99,6 +101,7 @@ def post_carousel(bronze, viewer, template):
                       {
                         "title": template[2]['title'],
                         "image_url": template[2]['poster'],
+                        "subtitle": template[2]['overview'],
                         "buttons":[
                               {
                                 "type":"web_url",
@@ -110,6 +113,7 @@ def post_carousel(bronze, viewer, template):
                       {
                         "title": template[3]['title'],
                         "image_url": template[3]['poster'],
+                        "subtitle": template[3]['overview'],
                         "buttons":[
                               {
                                 "type":"web_url",
