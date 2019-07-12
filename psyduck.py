@@ -202,7 +202,8 @@ def send_message(token, recipient, text):
             title = movie['title']
             overview = movie['overview']
             poster = 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + movie['poster_path']
-            web_view = 'https://www.themoviedb.org/movie/' + movie['id']
+            mov_id = movie['id']
+            web_view = 'https://www.themoviedb.org/movie/' + mov_id
             movdat = {
                 "title": title,
                 "overview": overview,
