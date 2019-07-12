@@ -212,7 +212,7 @@ def send_message(token, recipient, text):
                 "movie_id": web_view
             }
             movlis.append(movdat)
-        payload = movlis[:4]
+        payload = random.sample(movlis, 4)
         post_carousel(token, recipient, payload)
 
     elif text.decode('unicode_escape') in word_list1:
