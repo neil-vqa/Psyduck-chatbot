@@ -62,6 +62,40 @@ def post_pic(silver, sentto, picload):
                            "quick_replies": quick_reps}
             }),
             headers={'Content-type': 'application/json'})
+
+def post_carousel(bronze, viewer, template):
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+            params={"access_token": bronze},
+            data=json.dumps({
+              "recipient": {"id": viewer},
+              "message":{
+                "attachment":{
+                  "type":"template",
+                  "payload":{
+                    "template_type":"generic",
+                    "elements":[
+                       {
+                        "title": template[0]['title'],
+                        "image_url": template[0]['poster']
+                       },
+                      {
+                        "title": template[1]['title'],
+                        "image_url": template[1]['poster']
+                      },
+                      {
+                        "title": template[2]['title'],
+                        "image_url": template[2]['poster']
+                      },
+                      {
+                        "title": template[3]['title'],
+                        "image_url": template[3]['poster']
+                      }
+                      ]
+                     }
+                    }
+                   }
+              }),
+              headers={'Content-type': 'application/json'})
     
 hi_ls = ['Hi','Hello','hi','hello','Hey']
 help_ls = ['Help','help','More keywords']
@@ -138,11 +172,16 @@ def send_message(token, recipient, text):
         movlis = []
         for movie in top_mov['results']:
             title = movie['title']
-            overview = '  (OVERVIEW)  ' + movie['overview']
-            desc = title + overview
-            movlis.append(desc)
-        payload = random.choice(movlis)
-        post_this(token, recipient, payload)
+            overview = movie['overview']
+            poster = https://image.tmdb.org/t/p/w600_and_h900_bestv2 + movie['poster_path']
+            movdat = {
+                "title": title,
+                "overview": overview,
+                "poster": poster
+            }
+            movlis.append(movdat)
+        payload = movlis[:4]
+        post_carousel(token, recipient, payload)
 
     elif text.decode('unicode_escape') in word_list1:
         trivia = []
