@@ -114,14 +114,15 @@ def post_carousel(bronze, viewer, template):
                               {
                                 "type":"web_url",
                                 "url": template[3]['movie_id'],
-                                "title":"Overview"
+                                "title":"Overview",
+                                "webview_height_ratio": "tall"
                               }
                         ]
                       }
                       ]
                      }
                     }
-                   }
+                   "quick_replies": quick_reps}
               }),
               headers={'Content-type': 'application/json'})
     
@@ -202,7 +203,7 @@ def send_message(token, recipient, text):
             title = movie['title']
             overview = movie['overview']
             poster = 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + movie['poster_path']
-            mov_id = movie['id']
+            mov_id = str(movie['id'])
             web_view = 'https://www.themoviedb.org/movie/' + mov_id
             movdat = {
                 "title": title,
