@@ -76,19 +76,47 @@ def post_carousel(bronze, viewer, template):
                     "elements":[
                        {
                         "title": template[0]['title'],
-                        "image_url": template[0]['poster']
+                        "image_url": template[0]['poster'],
+                        "buttons":[
+                              {
+                                "type":"web_url",
+                                "url": template[0]['movie_id'],
+                                "title":"Overview"
+                              }
+                        ]
                        },
                       {
                         "title": template[1]['title'],
-                        "image_url": template[1]['poster']
+                        "image_url": template[1]['poster'],
+                        "buttons":[
+                              {
+                                "type":"web_url",
+                                "url": template[1]['movie_id'],
+                                "title":"Overview"
+                              }
+                        ]
                       },
                       {
                         "title": template[2]['title'],
-                        "image_url": template[2]['poster']
+                        "image_url": template[2]['poster'],
+                        "buttons":[
+                              {
+                                "type":"web_url",
+                                "url": template[2]['movie_id'],
+                                "title":"Overview"
+                              }
+                        ]
                       },
                       {
                         "title": template[3]['title'],
-                        "image_url": template[3]['poster']
+                        "image_url": template[3]['poster'],
+                        "buttons":[
+                              {
+                                "type":"web_url",
+                                "url": template[3]['movie_id'],
+                                "title":"Overview"
+                              }
+                        ]
                       }
                       ]
                      }
@@ -174,10 +202,12 @@ def send_message(token, recipient, text):
             title = movie['title']
             overview = movie['overview']
             poster = 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + movie['poster_path']
+            web_view = 'https://www.themoviedb.org/movie/' + movie['id']
             movdat = {
                 "title": title,
                 "overview": overview,
-                "poster": poster
+                "poster": poster,
+                "movie_id": web_view
             }
             movlis.append(movdat)
         payload = movlis[:4]
