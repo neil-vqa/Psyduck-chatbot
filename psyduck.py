@@ -131,7 +131,7 @@ def send_message(token, recipient, text):
         
     elif text.decode('unicode_escape') in movie_ls:
         ##url = "https://api.themoviedb.org/3/trending/movie/day?api_key=dbc5a5e4384cceeced1c90779da712da"
-        url = "https://api.themoviedb.org/3/movie/now_playing"
+        url = "https://api.themoviedb.org/3/movie/now_playing?api_key=dbc5a5e4384cceeced1c90779da712da&language=en-US&page=1"
         data_res = "{}"
         response = requests.request("GET", url, data=data_res)
         top_mov = json.loads(response.text)
