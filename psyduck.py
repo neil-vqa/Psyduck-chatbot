@@ -44,7 +44,8 @@ def post_this(gold, receiver, load):
             params={"access_token": gold},
             data=json.dumps({
                 "recipient": {"id": receiver},
-                "message": {"text": load}
+                "message": {"text": load,
+                           "quick_replies": quick_reps}
             }),
             headers={'Content-type': 'application/json'})
     
@@ -57,7 +58,8 @@ def post_pic(silver, sentto, picload):
                               "type": "image",
                               "payload": {
                                 "url": picload
-                              }}}
+                              }},
+                           "quick_replies": quick_reps}
             }),
             headers={'Content-type': 'application/json'})
     
@@ -76,6 +78,28 @@ word_list7 = ['TWICE','twice','Twice']
 word_list8 = ['Science', 'science', 'Tell me some science']
 word_list9 = ['Meme','meme','give meme','Give meme']
 word_list10 = ['Shower','Random']
+
+quick_reps = [{
+    "content_type":"text",
+    "title":"Trivia",
+    "payload":"Trivia"
+},
+  {
+    "content_type":"text",
+    "title":"Random",
+    "payload":"Random"
+},
+  {
+    "content_type":"text",
+    "title":"Tip",
+    "payload":"Tip"
+},
+  {
+    "content_type":"text",
+    "title":"Quote",
+    "payload":"Quote"
+}
+]
             
 def send_message(token, recipient, text):
     if text.decode('unicode_escape') in hi_ls:
