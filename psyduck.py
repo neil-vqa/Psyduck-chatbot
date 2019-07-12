@@ -64,10 +64,9 @@ def post_pic(silver, sentto, picload):
             headers={'Content-type': 'application/json'})
     
 hi_ls = ['Hi','Hello','hi','hello','Hey']
-help_ls = ['Help','help']
-mixed_ls = ['Gwapo ko','Gwapa ko']
+help_ls = ['Help','help','More keywords']
 eat_ls = ['Yummy','Suggest food','Recommend food','Food']
-movie_ls = ['Suggest movie','Recommend movie','What to watch?']
+movie_ls = ['Suggest movie','Recommend movie','What to watch?','Movie']
 word_list1 = ['Wat u think?','Tell me more','Speak','Hoy','Oy','Tell me','wat u think?','Bored','Trivia']
 word_list2 = ['Life tip','life tip','Tip','tip']
 word_list3 = ['Tell me a quote','Quote','Give a quote','quote']
@@ -86,33 +85,33 @@ quick_reps = [{
 },
   {
     "content_type":"text",
-    "title":"Random",
-    "payload":"Random"
-},
-  {
-    "content_type":"text",
-    "title":"Tip",
-    "payload":"Tip"
-},
-  {
-    "content_type":"text",
     "title":"Quote",
     "payload":"Quote"
+},
+  {
+    "content_type":"text",
+    "title":"News",
+    "payload":"News"
+},
+  {
+    "content_type":"text",
+    "title":"Cute",
+    "payload":"Cute"
+},
+  {
+    "content_type":"text",
+    "title":"More keywords",
+    "payload":"More keywords"
 }
 ]
             
 def send_message(token, recipient, text):
     if text.decode('unicode_escape') in hi_ls:
-        payload = "Psyduck? Yes I am Psyduck. Let me help you! Type 'Help' to learn some of my keywords."
+        payload = "Psyduck? Yes I am Psyduck. Let me help you! Type 'Help' to learn about my keywords."
         post_this(token, recipient, payload)
     
     elif text.decode('unicode_escape') in help_ls:
-        payload = "These are some of the keywords you can type so that I can interact with you well! \n Tell me a quote \n Wat u think? \n World news \n Life tip"
-        post_this(token, recipient, payload)
-
-    elif text.decode('unicode_escape') in mixed_ls:
-        mixed_res = ['yuck','Yes you are...that is compared with jinx','char']
-        payload = random.choice(mixed_res)
+        payload = "Keyword List: Food, Movie, Pic, Twice, Science, Random, Meme"
         post_this(token, recipient, payload)
         
     elif text.decode('unicode_escape') in eat_ls:
