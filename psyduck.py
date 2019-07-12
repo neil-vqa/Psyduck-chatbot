@@ -64,9 +64,9 @@ def post_pic(silver, sentto, picload):
 hi_ls = ['Hi','Hello','hi','hello','Hey']
 help_ls = ['Help','help']
 mixed_ls = ['Gwapo ko','Gwapa ko']
-eat_ls = ['Where to eat?','Suggest food','Recommend food']
+eat_ls = ['Yummy','Suggest food','Recommend food','Food']
 movie_ls = ['Suggest movie','Recommend movie','What to watch?']
-word_list1 = ['Wat u think?','Tell me more','Speak','Hoy','Oy','Tell me','wat u think?','Bored']
+word_list1 = ['Wat u think?','Tell me more','Speak','Hoy','Oy','Tell me','wat u think?','Bored','Trivia']
 word_list2 = ['Life tip','life tip','Tip','tip']
 word_list3 = ['Tell me a quote','Quote','Give a quote','quote']
 word_list4 = ['World news','world news','news','News']
@@ -75,6 +75,7 @@ word_list6 = ['Send pic','Pic pls','Pic']
 word_list7 = ['TWICE','twice','Twice']
 word_list8 = ['Science', 'science', 'Tell me some science']
 word_list9 = ['Meme','meme','give meme','Give meme']
+word_list10 = ['Shower','Random']
             
 def send_message(token, recipient, text):
     if text.decode('unicode_escape') in hi_ls:
@@ -91,9 +92,19 @@ def send_message(token, recipient, text):
         post_this(token, recipient, payload)
         
     elif text.decode('unicode_escape') in eat_ls:
-        eat_res = ['Jollibee','Mcdo','KFC','Mang Inasal','Greenwich','Yellow Cab','S&R','Carenderia','BBQ','kwek-kwek','Bibimbap','Bulgogi','Donut','Ramen','Sushi','Lechon']
-        payload = random.choice(eat_res)
-        post_this(token, recipient, payload)
+        eater = []
+        for submission in reddit.subreddit('FoodPorn').hot(limit=40):
+            if (submission.link_flair_css_class == 'image') or ((submission.is_self != True) and ((".jpg" in submission.url) or (".png" in submission.url))):
+                pict = {
+                    "title": submission.title,
+                    "p_url": submission.url
+                }
+                eater.append(pict)
+        payloader = random.choice(eater)
+        payload1 = payloader['p_url']
+        post_pic(token, recipient, payload1)
+        payload2 = payloader['title']
+        post_this(token, recipient, payload2)
         
     elif text.decode('unicode_escape') in movie_ls:
         url = "https://api.themoviedb.org/3/trending/movie/day?api_key=dbc5a5e4384cceeced1c90779da712da"
@@ -110,8 +121,15 @@ def send_message(token, recipient, text):
         post_this(token, recipient, payload)
 
     elif text.decode('unicode_escape') in word_list1:
+        trivia = []
+        for submission in reddit.subreddit('todayilearned').hot(limit=40):
+            trivia.append(submission.title)
+        payload = random.choice(trivia)
+        post_this(token, recipient, payload)
+    
+    elif text.decode('unicode_escape') in word_list10:
         shower = []
-        for submission in reddit.subreddit('Showerthoughts+explainlikeimfive+todayilearned').hot(limit=30):
+        for submission in reddit.subreddit('Showerthoughts+explainlikeimfive').hot(limit=50):
             shower.append(submission.title)
         payload = random.choice(shower)
         post_this(token, recipient, payload)
