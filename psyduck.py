@@ -173,7 +173,7 @@ def send_message(token, recipient, text):
         for movie in top_mov['results']:
             title = movie['title']
             overview = movie['overview']
-            poster = https://image.tmdb.org/t/p/w600_and_h900_bestv2 + movie['poster_path']
+            poster = 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + movie['poster_path']
             movdat = {
                 "title": title,
                 "overview": overview,
