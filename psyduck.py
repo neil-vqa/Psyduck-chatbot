@@ -1,7 +1,7 @@
 
 from flask import Flask, request
 import json, praw
-import requests, random
+import requests, random, word_list
 
 app = Flask(__name__)
 reddit = praw.Reddit(client_id='iGMNdhNR4e_Atg',
@@ -130,21 +130,6 @@ def post_carousel(bronze, viewer, template):
               }),
               headers={'Content-type': 'application/json'})
     
-hi_ls = ['Hi','Hello','hi','hello','Hey']
-help_ls = ['Help','help','More keywords']
-eat_ls = ['Yummy','Suggest food','Recommend food','Food']
-movie_ls = ['Suggest movie','Recommend movie','What to watch?','Movie']
-word_list1 = ['Wat u think?','Tell me more','Speak','Hoy','Oy','Tell me','wat u think?','Bored','Trivia']
-word_list2 = ['Life tip','life tip','Tip','tip']
-word_list3 = ['Tell me a quote','Quote','Give a quote','quote']
-word_list4 = ['World news','world news','news','News']
-word_list5 = ['Aww','Cute','Cutie','Awww','aww','cute']
-word_list6 = ['Send pic','Pic pls','Pic']
-word_list7 = ['TWICE','twice','Twice']
-word_list8 = ['Science', 'science', 'Tell me some science']
-word_list9 = ['Meme','meme','give meme','Give meme']
-word_list10 = ['Shower','Random']
-
 quick_reps = [{
     "content_type":"text",
     "title":"Trivia",
@@ -173,15 +158,15 @@ quick_reps = [{
 ]
             
 def send_message(token, recipient, text):
-    if text.decode('unicode_escape') in hi_ls:
+    if word_list.list1(text.decode('unicode_escape')) == True:
         payload = "Psyduck? Yes I am Psyduck. Let me help you! Type 'Help' to learn about my keywords."
         post_this(token, recipient, payload)
     
-    elif text.decode('unicode_escape') in help_ls:
-        payload = "Keyword List: Food, Movie, Pic, Twice, Science, Random, Meme"
+    elif word_list.list2(text.decode('unicode_escape')) == True:
+        payload = "Keyword List: Food, Movie, Pic, Twice, Science, Random, Meme, Trivia, Quote, News, Cute"
         post_this(token, recipient, payload)
         
-    elif text.decode('unicode_escape') in eat_ls:
+    elif word_list.list3(text.decode('unicode_escape')) == True:
         eater = []
         for submission in reddit.subreddit('FoodPorn').hot(limit=40):
             if (submission.link_flair_css_class == 'image') or ((submission.is_self != True) and ((".jpg" in submission.url) or (".png" in submission.url))):
@@ -196,7 +181,7 @@ def send_message(token, recipient, text):
         payload2 = payloader['title']
         post_this(token, recipient, payload2)
         
-    elif text.decode('unicode_escape') in movie_ls:
+    elif word_list.list4(text.decode('unicode_escape')) == True:
         ##url = "https://api.themoviedb.org/3/trending/movie/day?api_key=dbc5a5e4384cceeced1c90779da712da"
         url = "https://api.themoviedb.org/3/movie/now_playing?api_key=dbc5a5e4384cceeced1c90779da712da&language=en-US&page=1"
         data_res = "{}"
@@ -219,28 +204,28 @@ def send_message(token, recipient, text):
         payload = random.sample(movlis, 4)
         post_carousel(token, recipient, payload)
 
-    elif text.decode('unicode_escape') in word_list1:
+    elif word_list.list5(text.decode('unicode_escape')) == True:
         trivia = []
         for submission in reddit.subreddit('todayilearned').hot(limit=40):
             trivia.append(submission.title)
         payload = random.choice(trivia)
         post_this(token, recipient, payload)
     
-    elif text.decode('unicode_escape') in word_list10:
+    elif word_list.list14(text.decode('unicode_escape')) == True:
         shower = []
         for submission in reddit.subreddit('Showerthoughts+explainlikeimfive').hot(limit=50):
             shower.append(submission.title)
         payload = random.choice(shower)
         post_this(token, recipient, payload)
     
-    elif text.decode('unicode_escape') in word_list2:
+    elif word_list.list6(text.decode('unicode_escape')) == True:
         lifer = []
         for submission in reddit.subreddit('LifeProTips').hot(limit=30):
             lifer.append(submission.title)
         payload = random.choice(lifer)
         post_this(token, recipient, payload)
 
-    elif text.decode('unicode_escape') in word_list3:
+    elif word_list.list7(text.decode('unicode_escape')) == True:
         quoter = []
         for submission in reddit.subreddit('QuotesPorn').hot(limit=30):
             if (submission.link_flair_css_class == 'image') or ((submission.is_self != True) and ((".jpg" in submission.url) or (".png" in submission.url))):
@@ -248,7 +233,7 @@ def send_message(token, recipient, text):
         payload = random.choice(quoter)
         post_pic(token, recipient, payload)
 
-    elif text.decode('unicode_escape') in word_list4:
+    elif word_list.list8(text.decode('unicode_escape')) == True:
         newser = []
         for submission in reddit.subreddit('worldnews').hot(limit=30):
             newt = submission.title
@@ -258,7 +243,7 @@ def send_message(token, recipient, text):
         payload = random.choice(newser)
         post_this(token, recipient, payload)
         
-    elif text.decode('unicode_escape') in word_list5:
+    elif word_list.list9(text.decode('unicode_escape')) == True:
         awwer = []
         for submission in reddit.subreddit('aww').hot(limit=50):
             if (submission.link_flair_css_class == 'image') or ((submission.is_self != True) and ((".jpg" in submission.url) or (".png" in submission.url))):
@@ -273,7 +258,7 @@ def send_message(token, recipient, text):
         payload2 = payloader['title']
         post_this(token, recipient, payload2)
 
-    elif text.decode('unicode_escape') in word_list6:
+    elif word_list.list10(text.decode('unicode_escape')) == True:
         picker = []
         for submission in reddit.subreddit('pics+EarthPorn').top(time_filter='day', limit=30):
             if (submission.link_flair_css_class == 'image') or ((submission.is_self != True) and ((".jpg" in submission.url) or (".png" in submission.url))):
@@ -288,7 +273,7 @@ def send_message(token, recipient, text):
         payload2 = payloader['title']
         post_this(token, recipient, payload2)
 
-    elif text.decode('unicode_escape') in word_list7:
+    elif word_list.list11(text.decode('unicode_escape')) == True:
         once = []
         for submission in reddit.subreddit('twice').top(time_filter='day', limit=30):
             if (submission.link_flair_css_class == 'image') or ((submission.is_self != True) and ((".jpg" in submission.url) or (".png" in submission.url))):
@@ -296,7 +281,7 @@ def send_message(token, recipient, text):
         payload = random.choice(once)
         post_pic(token, recipient, payload)
         
-    elif text.decode('unicode_escape') in word_list8:
+    elif word_list.list12(text.decode('unicode_escape')) == True:
         scientist = []
         for submission in reddit.subreddit('science').top(time_filter='week', limit=30):
             sciencet = submission.title
@@ -306,7 +291,7 @@ def send_message(token, recipient, text):
         payload = random.choice(scientist)
         post_this(token, recipient, payload)
         
-    elif text.decode('unicode_escape') in word_list9:
+    elif word_list.list13(text.decode('unicode_escape')) == True:
         memer = []
         for submission in reddit.subreddit('AdviceAnimals+funny').hot(limit=70):
             if (submission.link_flair_css_class == 'image') or ((submission.is_self != True) and ((".jpg" in submission.url) or (".png" in submission.url))):
