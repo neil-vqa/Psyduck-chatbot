@@ -252,7 +252,7 @@ def send_message(token, recipient, text):
         newser = []
         for submission in reddit.subreddit('worldnews').hot(limit=30):
             newt = submission.title
-            newu = '  (LINK)  ' + submission.url
+            newu = '  (Full Article)  ' + submission.url
             newf = newt + newu
             newser.append(newf)
         payload = random.choice(newser)
@@ -300,7 +300,7 @@ def send_message(token, recipient, text):
         scientist = []
         for submission in reddit.subreddit('science').top(time_filter='week', limit=30):
             sciencet = submission.title
-            scienceu = '  (LINK)  ' + submission.url
+            scienceu = '  (Full Article)  ' + submission.url
             sciencef = sciencet + scienceu
             scientist.append(sciencef)
         payload = random.choice(scientist)
