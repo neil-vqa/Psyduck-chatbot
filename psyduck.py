@@ -212,12 +212,13 @@ def send_message(token, recipient, text):
         payload1 = payloader['p_url']
         post_pic(token, recipient, payload1)
     
-    #else:
+    else:
         r = requests.post("https://graph.facebook.com/v2.6/me/messages",
             params={"access_token": token},
             data=json.dumps({
                 "recipient": {"id": recipient},
-                "message": {"text": text.decode('unicode_escape')}
+                "message": {"text": text.decode('unicode_escape'),
+                           "quick_replies": template.quick_reps()}
             }),
             headers={'Content-type': 'application/json'})
         if r.status_code != requests.codes.ok:
