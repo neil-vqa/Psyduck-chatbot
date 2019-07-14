@@ -94,6 +94,6 @@ def movie_carousel(bronze, viewer, template):
                       ]
                      }
                     },
-                   "quick_replies": quick_reps}
+                   "quick_replies": quick_reps()}
               }),
               headers={'Content-type': 'application/json'})
