@@ -117,7 +117,7 @@ def music_carousel(bronze2, viewer, template):
                       {
                         "title": template[1]['title'],
                         "image_url": "https://i.imgur.com/A5vTPFu.jpg",
-                        "subtitle": template[1]['overview'],
+                        "subtitle": template[1]['artist'],
                       },
                       {
                         "title": template[2]['title'],
