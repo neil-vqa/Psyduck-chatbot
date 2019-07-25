@@ -1,6 +1,6 @@
 
 from flask import Flask, request
-import json, praw, template
+import json, praw, template, spotify_int
 import requests, random, word_list
 
 app = Flask(__name__)
@@ -212,13 +212,19 @@ def send_message(token, recipient, text):
         payload1 = payloader['p_url']
         post_pic(token, recipient, payload1)
     
-    elif text.decode('unicode_escape') == "Photography Service":
+    elif text.decode('unicode_escape') == "Photography service":
         payload1 = "https://i.imgur.com/0LOlL2t.jpg"
         post_pic(token, recipient, payload1)
         payload2 = "Ed Montes Photography: ........."
         post_this(token, recipient, payload2)
         payload3 = "See more of our quality portraits by visiting our page: https://www.facebook.com/edmontesphoto"
         post_this(token, recipient, payload3)
+    
+    elif ("Music" or "music") in text.decode('unicode_escape'):
+        output = input[6:]
+        artist = spotify_int.get_artist(output)
+        payload = spotify_int.show_recommendations_for_artist(artist)
+        template.music_carousel(token, recipient, payload)
     
     else:
         r = requests.post("https://graph.facebook.com/v2.6/me/messages",
