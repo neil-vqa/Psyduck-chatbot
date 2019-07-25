@@ -221,6 +221,7 @@ def send_message(token, recipient, text):
         post_this(token, recipient, payload3)
     
     elif ("Music" or "music") in text.decode('unicode_escape'):
+        input = text.decode('unicode_escape')
         output = input[6:]
         artist = spotify_int.get_artist(output)
         payload = spotify_int.show_recommendations_for_artist(artist)
