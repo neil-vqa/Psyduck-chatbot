@@ -111,42 +111,42 @@ def music_carousel(bronze2, viewer, template):
                     "elements":[
                        {
                         "title": template[0]['title'],
-                        "image_url": "https://i.imgur.com/A5vTPFu.jpg",
+                        "image_url": template[0]['cover'],
                         "subtitle": template[0]['artist'],
                        },
                       {
                         "title": template[1]['title'],
-                        "image_url": "https://i.imgur.com/A5vTPFu.jpg",
+                        "image_url": template[1]['cover'],
                         "subtitle": template[1]['artist'],
                       },
                       {
                         "title": template[2]['title'],
-                        "image_url": "https://i.imgur.com/A5vTPFu.jpg",
+                        "image_url": template[2]['cover'],
                         "subtitle": template[2]['artist'],
                       },
                       {
                         "title": template[3]['title'],
-                        "image_url": "https://i.imgur.com/A5vTPFu.jpg",
+                        "image_url": template[3]['cover'],
                         "subtitle": template[3]['artist'],
                       },
                       {
                         "title": template[4]['title'],
-                        "image_url": "https://i.imgur.com/A5vTPFu.jpg",
+                        "image_url": template[4]['cover'],
                         "subtitle": template[4]['artist'],
                       },
                       {
                         "title": template[5]['title'],
-                        "image_url": "https://i.imgur.com/A5vTPFu.jpg",
+                        "image_url": template[5]['cover'],
                         "subtitle": template[5]['artist'],
                       },
                       {
                         "title": template[6]['title'],
-                        "image_url": "https://i.imgur.com/A5vTPFu.jpg",
+                        "image_url": template[6]['cover'],
                         "subtitle": template[6]['artist'],
                       },
                       {
                         "title": template[7]['title'],
-                        "image_url": "https://i.imgur.com/A5vTPFu.jpg",
+                        "image_url": template[7]['cover'],
                         "subtitle": template[7]['artist'],
                       }
                       ]
