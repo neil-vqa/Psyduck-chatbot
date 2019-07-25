@@ -212,6 +212,14 @@ def send_message(token, recipient, text):
         payload1 = payloader['p_url']
         post_pic(token, recipient, payload1)
     
+    elif text.decode('unicode_escape') == "Photography Service":
+        payload1 = "https://i.imgur.com/0LOlL2t.jpg"
+        post_pic(token, recipient, payload1)
+        payload2 = "Ed Montes Photography: ........."
+        post_this(token, recipient, payload2)
+        payload3 = "See more of our quality portraits by visiting our page: https://www.facebook.com/edmontesphoto"
+        post_this(token, recipient, payload3)
+    
     else:
         r = requests.post("https://graph.facebook.com/v2.6/me/messages",
             params={"access_token": token},
