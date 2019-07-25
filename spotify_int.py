@@ -22,9 +22,11 @@ def show_recommendations_for_artist(artist):
     for track in results['tracks']:
         title = track['name']
         artist = track['artists'][0]['name']
+        cover = track['album']['images'][1]['url']
         music_dat = {
                 "title": title,
-                "artist": artist
+                "artist": artist,
+                "cover": cover
         }
         music_list.append(music_dat)
     final_list = random.sample(music_list, 8)
