@@ -97,3 +97,61 @@ def movie_carousel(bronze, viewer, template):
                    "quick_replies": quick_reps()}
               }),
               headers={'Content-type': 'application/json'})
+
+def music_carousel(bronze2, viewer, template):
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+            params={"access_token": bronze2},
+            data=json.dumps({
+              "recipient": {"id": viewer},
+              "message":{
+                "attachment":{
+                  "type":"template",
+                  "payload":{
+                    "template_type":"generic",
+                    "elements":[
+                       {
+                        "title": template[0]['title'],
+                        "image_url": "https://i.imgur.com/A5vTPFu.jpg",
+                        "subtitle": template[0]['artist'],
+                       },
+                      {
+                        "title": template[1]['title'],
+                        "image_url": "https://i.imgur.com/A5vTPFu.jpg",
+                        "subtitle": template[1]['overview'],
+                      },
+                      {
+                        "title": template[2]['title'],
+                        "image_url": "https://i.imgur.com/A5vTPFu.jpg",
+                        "subtitle": template[2]['artist'],
+                      },
+                      {
+                        "title": template[3]['title'],
+                        "image_url": "https://i.imgur.com/A5vTPFu.jpg",
+                        "subtitle": template[3]['artist'],
+                      },
+                      {
+                        "title": template[4]['title'],
+                        "image_url": "https://i.imgur.com/A5vTPFu.jpg",
+                        "subtitle": template[4]['artist'],
+                      },
+                      {
+                        "title": template[5]['title'],
+                        "image_url": "https://i.imgur.com/A5vTPFu.jpg",
+                        "subtitle": template[5]['artist'],
+                      },
+                      {
+                        "title": template[6]['title'],
+                        "image_url": "https://i.imgur.com/A5vTPFu.jpg",
+                        "subtitle": template[6]['artist'],
+                      },
+                      {
+                        "title": template[7]['title'],
+                        "image_url": "https://i.imgur.com/A5vTPFu.jpg",
+                        "subtitle": template[7]['artist'],
+                      }
+                      ]
+                     }
+                    },
+                   "quick_replies": quick_reps()}
+              }),
+              headers={'Content-type': 'application/json'})
