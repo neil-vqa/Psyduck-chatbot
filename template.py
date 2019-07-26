@@ -9,13 +9,13 @@ def quick_reps():
         },
         {
             "content_type":"text",
-            "title":"Quote",
-            "payload":"Quote"
+            "title":"Food",
+            "payload":"Food"
         },
         {
             "content_type":"text",
-            "title":"News",
-            "payload":"News"
+            "title":"Movie",
+            "payload":"Movie"
         },
         {
             "content_type":"text",
