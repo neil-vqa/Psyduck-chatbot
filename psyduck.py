@@ -1,7 +1,7 @@
 
 from flask import Flask, request
 import json, praw, template, spotify_int
-import requests, random, word_list
+import requests, random, word_list, weather
 
 app = Flask(__name__)
 reddit = praw.Reddit(client_id='iGMNdhNR4e_Atg',
@@ -36,6 +36,11 @@ def messaging_events(payload):
     for event in messaging_events:
         if "message" in event and "text" in event["message"]:
             yield event["sender"]["id"], event["message"]["text"].encode('unicode_escape')
+        elif "message" in event and "attachments" in event["message"]:
+            lat = event["message"]['attachments'][0]['payload']['coordinates']['lat']
+            long = event["message"]['attachments'][0]['payload']['coordinates']['long']
+            coordinates = 'coords' + ' ' + lat + ',' + long
+            yield event["sender"]["id"], coordinates.encode('unicode_escape')
         elif "messsage" in event and "mid" in event["message"]:
             yield event["sender"]["id"], 'Wala ko kasabot'.encode('unicode_escape')
 
@@ -225,6 +230,17 @@ def send_message(token, recipient, text):
         artist = spotify_int.get_artist(output)
         payload = spotify_int.show_recommendations_for_artist(artist)
         template.music_carousel(token, recipient, payload)
+    
+    elif "coords" in text.decode('unicode_escape'):
+        input = text.decode('unicode_escape')
+        output = input[7:]
+        forecast = weather.forecaster(output)
+        payload1 = 'Apparent Temperature:' + forecast[0]['apparentTemperature'] + 'degrees Celsius'
+        post_this(token, recipient, payload1)
+        payload2 = 'Probability of Rain:' + forecast[0]['precipProbability']
+        post_this(token, recipient, payload2)
+        payload3 = 'General Forecast for Today:' + forecast[1]
+        post_this(token, recipient, payload3)
     
     else:
         r = requests.post("https://graph.facebook.com/v2.6/me/messages",
