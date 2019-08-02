@@ -235,9 +235,9 @@ def send_message(token, recipient, text):
         input = text.decode('unicode_escape')
         output = input[7:]
         forecast = weather.forecaster(output)
-        payload1 = 'Apparent Temperature:' + forecast[0]['apparentTemperature'] + 'degrees Celsius'
+        payload1 = 'Apparent Temperature:' + str(forecast[0]['apparentTemperature']) + 'degrees Celsius'
         post_this(token, recipient, payload1)
-        payload2 = 'Probability of Rain:' + forecast[0]['precipProbability']
+        payload2 = 'Probability of Rain:' + str(forecast[0]['precipProbability'])
         post_this(token, recipient, payload2)
         payload3 = 'General Forecast for Today:' + forecast[1]
         post_this(token, recipient, payload3)
