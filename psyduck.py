@@ -69,7 +69,7 @@ def send_message(token, recipient, text):
         post_this(token, recipient, payload)
     
     elif word_list.list2(text.decode('unicode_escape')) == True:
-        payload = "Keyword List: Pic, Quote, News, Twice, Music<space>[name of artist], Science, Random, Funny, Trivia, Food, Movie, Cute"
+        payload = "Keyword List: Pic, Quote, News, Twice, Music<space>[name of artist], Tip, Science, Random, Funny, Trivia, Food, Movie, Cute"
         post_this(token, recipient, payload)
         
     elif word_list.list3(text.decode('unicode_escape')) == True:
@@ -88,7 +88,6 @@ def send_message(token, recipient, text):
         post_this(token, recipient, payload2)
         
     elif word_list.list4(text.decode('unicode_escape')) == True:
-        ##url = "https://api.themoviedb.org/3/trending/movie/day?api_key=dbc5a5e4384cceeced1c90779da712da"
         url = "https://api.themoviedb.org/3/movie/now_playing?api_key=dbc5a5e4384cceeced1c90779da712da&language=en-US&page=1"
         data_res = "{}"
         response = requests.request("GET", url, data=data_res)
