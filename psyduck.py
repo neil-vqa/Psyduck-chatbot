@@ -37,8 +37,8 @@ def messaging_events(payload):
         if "message" in event and "text" in event["message"]:
             yield event["sender"]["id"], event["message"]["text"].encode('unicode_escape')
         elif "message" in event and "attachments" in event["message"]:
-            lat = event["message"]['attachments'][0]['payload']['coordinates']['lat']
-            long = event["message"]['attachments'][0]['payload']['coordinates']['long']
+            lat = str(event["message"]['attachments'][0]['payload']['coordinates']['lat'])
+            long = str(event["message"]['attachments'][0]['payload']['coordinates']['long'])
             coordinates = 'coords' + ' ' + lat + ',' + long
             yield event["sender"]["id"], coordinates.encode('unicode_escape')
         elif "messsage" in event and "mid" in event["message"]:
