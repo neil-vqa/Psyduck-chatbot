@@ -69,7 +69,7 @@ def send_message(token, recipient, text):
         post_this(token, recipient, payload)
     
     elif word_list.list2(text.decode('unicode_escape')) == True:
-        payload = "Keyword List: Food, Movie, Pic, Twice, Science, Random, Meme, Trivia, Quote, News, Cute"
+        payload = "Keyword List: Pic, Quote, News, Twice, Music<space>[name of artist], Science, Random, Funny, Trivia, Food, Movie, Cute"
         post_this(token, recipient, payload)
         
     elif word_list.list3(text.decode('unicode_escape')) == True:
