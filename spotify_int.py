@@ -1,5 +1,5 @@
 
-import spotipy, random
+import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 
 client_id = 'c8c1c930c1714cff9e4f22b0ded3a4af'
@@ -31,7 +31,7 @@ def show_recommendations_for_artist(artist):
                 "preview": preview
         }
         music_list.append(music_dat)
-    final_list = random.sample(music_list, 4)
+    final_list = music_list[:4]
     return final_list
 
 
