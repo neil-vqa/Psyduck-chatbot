@@ -156,54 +156,6 @@ def music_carousel(bronze2, viewer, template):
                                 "title":"Play Preview"
                               }
                         ]
-                      },
-                      {
-                        "title": template[4]['title'],
-                        "image_url": template[4]['cover'],
-                        "subtitle": template[4]['artist'],
-                        "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": template[4]['preview'],
-                                "title":"Play Preview"
-                              }
-                        ]
-                      },
-                      {
-                        "title": template[5]['title'],
-                        "image_url": template[5]['cover'],
-                        "subtitle": template[5]['artist'],
-                        "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": template[5]['preview'],
-                                "title":"Play Preview"
-                              }
-                        ]
-                      },
-                      {
-                        "title": template[6]['title'],
-                        "image_url": template[6]['cover'],
-                        "subtitle": template[6]['artist'],
-                        "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": template[6]['preview'],
-                                "title":"Play Preview"
-                              }
-                        ]
-                      },
-                      {
-                        "title": template[7]['title'],
-                        "image_url": template[7]['cover'],
-                        "subtitle": template[7]['artist'],
-                        "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": template[7]['preview'],
-                                "title":"Play Preview"
-                              }
-                        ]
                       }
                       ]
                      }
