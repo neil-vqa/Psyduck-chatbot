@@ -24,7 +24,7 @@ def show_recommendations_for_artist(artist):
         artist = track['artists'][0]['name']
         cover = track['album']['images'][1]['url']
         if track['preview_url'] == None:
-            preview = 'https://i.imgur.com/A5vTPFu.jpg'
+            preview = 'https://i.imgur.com/RjWrcdk.jpg'
         else:
             preview = track['preview_url']
         music_dat = {
