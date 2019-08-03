@@ -241,7 +241,7 @@ def send_message(token, recipient, text):
         post_this(token, recipient, payload1)
         payload2 = 'Probability of Rain: ' + str(forecast[0]['precipProbability'])
         post_this(token, recipient, payload2)
-        payload3 = 'General Forecast for Today: ' + forecast[1] + ' (Powered by Dark Sky)'
+        payload3 = 'General Forecast for Today: ' + forecast[1] + ' (Powered by DarkSky.net)'
         post_this(token, recipient, payload3)
     
     else:
