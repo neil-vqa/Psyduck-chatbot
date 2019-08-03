@@ -31,7 +31,7 @@ def show_recommendations_for_artist(artist):
                 "preview": preview
         }
         music_list.append(music_dat)
-    final_list = random.sample(music_list, 8)
+    final_list = random.sample(music_list, 4)
     return final_list
 
 
