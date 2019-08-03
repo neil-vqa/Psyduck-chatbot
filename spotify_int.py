@@ -23,7 +23,7 @@ def show_recommendations_for_artist(artist):
         title = track['name']
         artist = track['artists'][0]['name']
         cover = track['album']['images'][1]['url']
-        if track['preview_url'] == "None":
+        if track['preview_url'] == None:
             preview = 'https://i.imgur.com/A5vTPFu.jpg'
         else:
             preview = track['preview_url']
