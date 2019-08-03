@@ -74,8 +74,12 @@ def send_message(token, recipient, text):
         post_this(token, recipient, payload)
     
     elif word_list.list2(text.decode('unicode_escape')) == True:
-        payload = "Keyword List: Pic, Quote, News, Twice, Music<space>[name of artist], Tip, Science, Random, Funny, Trivia, Food, Movie, Cute"
-        post_this(token, recipient, payload)
+        payload1 = "Keyword List: Pic, Quote, News, Twice, Tip, Science, Random, Funny, Trivia, Food, Movie, Cute"
+        post_this(token, recipient, payload1)
+        payload2 = "For music recommendation, type 'Music [name of artist]'"
+        post_this(token, recipient, payload2)
+        payload3 = "For weather forecast, send your 'LOCATION' through Messenger's 'location pinning' found in the bottom left corner (left of camera icon)"
+        post_this(token, recipient, payload3)
         
     elif word_list.list3(text.decode('unicode_escape')) == True:
         eater = []
