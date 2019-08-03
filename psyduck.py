@@ -1,6 +1,6 @@
 
 from flask import Flask, request
-import json, praw, template, spotify_int
+import json, praw, template, spotify_int, food
 import requests, random, word_list, weather
 
 app = Flask(__name__)
@@ -247,6 +247,19 @@ def send_message(token, recipient, text):
         post_this(token, recipient, payload2)
         payload3 = 'General Forecast for Today: ' + forecast[1] + ' (Powered by DarkSky.net)'
         post_this(token, recipient, payload3)
+    
+    elif ("Food" or "food") in text.decode('unicode_escape'):
+        input = text.decode('unicode_escape')
+        output = input[5:]
+        data = food.nutri_search(output)
+        data2 = str(food.claim_search(output))
+        payload1 = data[9]
+        post_pic(token, recipient, payload1)
+        part1 = "\nFood: " + data[0] + "\nServing quantity: " + data[1] + "\nServing unit: " + data[2]
+        part2 = "\nServing weight: " + data[3] + "\nCalories: " + data[4] + "\nTotal fat: " + data[5]
+        part3 = "\nCholesterol: " + data[6] + "\nSugar: " + data[7] + "\nProtein: " + data[8] + "\nClaims: " + data2
+        payload2 = "Nutrition Facts" + part1 + part2 + part3
+        post_this(token, recipient, payload2)
     
     else:
         r = requests.post("https://graph.facebook.com/v2.6/me/messages",
