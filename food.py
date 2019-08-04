@@ -32,6 +32,6 @@ def nutri_search(find):
     chol = str(result['foods'][0]['nf_cholesterol']) + ' mg'
     sugar = str(result['foods'][0]['nf_sugars']) + ' grams'
     protein = str(result['foods'][0]['nf_protein']) + ' grams'
-    photo = result['foods'][0]['photo']['thumb']
+    photo = result['foods'][0]['photo']['highres']
 
     return name, quantity, unit, grams, calories, fat, chol, sugar, protein, photo
