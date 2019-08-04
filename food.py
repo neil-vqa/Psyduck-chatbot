@@ -1,7 +1,6 @@
 
 import requests, json
 
-
 def claim_search(find):
     extend = '&self=false&branded=false&common=true&claims=true'
     url = 'https://trackapi.nutritionix.com/v2/search/instant?query=' + find + extend
@@ -32,6 +31,6 @@ def nutri_search(find):
     chol = str(result['foods'][0]['nf_cholesterol']) + ' mg'
     sugar = str(result['foods'][0]['nf_sugars']) + ' grams'
     protein = str(result['foods'][0]['nf_protein']) + ' grams'
-    photo = result['foods'][0]['photo']['highres']
+    photo = result['foods'][0]['photo']['thumb']
 
     return name, quantity, unit, grams, calories, fat, chol, sugar, protein, photo
