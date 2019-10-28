@@ -36,11 +36,11 @@ def messaging_events(payload):
     for event in messaging_events:
         if "message" in event and "text" in event["message"]:
             yield event["sender"]["id"], event["message"]["text"].encode('unicode_escape')
-        elif "message" in event and "attachments" in event["message"]:
-            lat = str(event["message"]['attachments'][0]['payload']['coordinates']['lat'])
-            long = str(event["message"]['attachments'][0]['payload']['coordinates']['long'])
-            coordinates = 'coords' + ' ' + lat + ',' + long
-            yield event["sender"]["id"], coordinates.encode('unicode_escape')
+        ##elif "message" in event and "attachments" in event["message"]:
+            ##lat = str(event["message"]['attachments'][0]['payload']['coordinates']['lat'])
+            ##long = str(event["message"]['attachments'][0]['payload']['coordinates']['long'])
+            ##coordinates = 'coords' + ' ' + lat + ',' + long
+            ##yield event["sender"]["id"], coordinates.encode('unicode_escape')
         elif "messsage" in event and "mid" in event["message"]:
             yield event["sender"]["id"], 'Wala ko kasabot'.encode('unicode_escape')
 
@@ -237,18 +237,18 @@ def send_message(token, recipient, text):
         payload = spotify_int.show_recommendations_for_artist(artist)
         template.music_carousel(token, recipient, payload)
     
-    elif "coords" in text.decode('unicode_escape'):
-        input = text.decode('unicode_escape')
-        output = input[7:]
-        forecast = weather.forecaster(output)
-        pic_payload = 'https://i.imgur.com/mLn6zHx.png'
-        post_pic(token, recipient, pic_payload)
-        payload1 = 'Apparent Temperature: ' + str(forecast[0]['apparentTemperature']) + ' deg Celsius'
-        post_this(token, recipient, payload1)
-        payload2 = 'Probability of Rain: ' + str(forecast[0]['precipProbability'])
-        post_this(token, recipient, payload2)
-        payload3 = 'General Forecast for Today: ' + forecast[1] + ' (Powered by DarkSky.net)'
-        post_this(token, recipient, payload3)
+    ##elif "coords" in text.decode('unicode_escape'):
+        ##input = text.decode('unicode_escape')
+        ##output = input[7:]
+        ##forecast = weather.forecaster(output)
+        ##pic_payload = 'https://i.imgur.com/mLn6zHx.png'
+        ##post_pic(token, recipient, pic_payload)
+        ##payload1 = 'Apparent Temperature: ' + str(forecast[0]['apparentTemperature']) + ' deg Celsius'
+        ##post_this(token, recipient, payload1)
+        ##payload2 = 'Probability of Rain: ' + str(forecast[0]['precipProbability'])
+        ##post_this(token, recipient, payload2)
+        ##payload3 = 'General Forecast for Today: ' + forecast[1] + ' (Powered by DarkSky.net)'
+        ##post_this(token, recipient, payload3)
     
     elif ("Food" or "food") in text.decode('unicode_escape'):
         input = text.decode('unicode_escape')
