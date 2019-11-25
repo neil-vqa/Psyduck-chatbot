@@ -78,8 +78,8 @@ def send_message(token, recipient, text):
         post_this(token, recipient, payload1)
         payload2 = "For music recommendation, type 'Music [name of artist]'"
         post_this(token, recipient, payload2)
-        payload3 = "For weather forecast, send your 'LOCATION' through Messenger's 'location pinning' found in the bottom left corner (left of camera icon)"
-        post_this(token, recipient, payload3)
+        ##payload3 = "For weather forecast, send your 'LOCATION' through Messenger's 'location pinning' found in the bottom left corner (left of camera icon)"
+        ##post_this(token, recipient, payload3)
         payload4 = "For food nutrient facts, write 'Food [name of food]'"
         post_this(token, recipient, payload4)
         
