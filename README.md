@@ -13,5 +13,5 @@ I don't store any of the actions (i.e. chat messages) to a dedicated database. A
 
 Contact
 
-If you have any questions about this Privacy Policy, please contact nvq.alino@gmail.com
+If you have any questions about this Privacy Policy, please contact nvqa.business@gmail.com
 
