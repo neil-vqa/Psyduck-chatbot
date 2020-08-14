@@ -4,7 +4,7 @@ import wikipedia
 def search(query):
 	search = wikipedia.search(query)
 	
-	return search
+	return print(search)
 	
 def summary(query):
 	summary = wikipedia.summary(query)

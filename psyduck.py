@@ -237,18 +237,17 @@ def send_message(token, recipient, text):
         payload = spotify_int.show_recommendations_for_artist(artist)
         template.music_carousel(token, recipient, payload)
     
-    ##elif "coords" in text.decode('unicode_escape'):
-        ##input = text.decode('unicode_escape')
-        ##output = input[7:]
-        ##forecast = weather.forecaster(output)
-        ##pic_payload = 'https://i.imgur.com/mLn6zHx.png'
-        ##post_pic(token, recipient, pic_payload)
-        ##payload1 = 'Apparent Temperature: ' + str(forecast[0]['apparentTemperature']) + ' deg Celsius'
-        ##post_this(token, recipient, payload1)
-        ##payload2 = 'Probability of Rain: ' + str(forecast[0]['precipProbability'])
-        ##post_this(token, recipient, payload2)
-        ##payload3 = 'General Forecast for Today: ' + forecast[1] + ' (Powered by DarkSky.net)'
-        ##post_this(token, recipient, payload3)
+    elif ("Search" or "search") in text.decode('unicode_escape'):
+        input = text.decode('unicode_escape')
+        output = input[7:]
+        payload = wiki.search(output)
+        post_this(token, recipient, payload)
+        
+    elif ("Wiki" or "wiki") in text.decode('unicode_escape'):
+        input = text.decode('unicode_escape')
+        output = input[5:]
+        payload = wiki.summary(output)
+        post_this(token, recipient, payload)
     
     elif ("Food" or "food") in text.decode('unicode_escape'):
         input = text.decode('unicode_escape')
@@ -262,18 +261,6 @@ def send_message(token, recipient, text):
         part3 = "\nCholesterol: " + data[6] + "\nSugar: " + data[7] + "\nProtein: " + data[8] + "\nClaims: " + data2
         payload2 = "Nutrition Facts" + part1 + part2 + part3
         post_this(token, recipient, payload2)
-    
-    elif ("Search" or "search") in text.decode('unicode_escape'):
-        input = text.decode('unicode_escape')
-        output = input[7:]
-        payload = wiki.search(output)
-        post_this(token, recipient, payload)
-        
-    elif ("Wiki" or "wiki") in text.decode('unicode_escape'):
-        input = text.decode('unicode_escape')
-        output = input[5:]
-        payload = wiki.summary(output)
-        post_this(token, recipient, payload)
     
     else:
         r = requests.post("https://graph.facebook.com/v2.6/me/messages",
