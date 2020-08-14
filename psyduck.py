@@ -74,7 +74,7 @@ def send_message(token, recipient, text):
         post_this(token, recipient, payload)
     
     elif word_list.list2(text.decode('unicode_escape')) == True:
-        payload1 = "Keyword List: Pic, Quote, News, Twice, Tip, Science, Random, Funny, Trivia, Food, Movie, Cute"
+        payload1 = "Keyword List: Pic, Quote, News, Twice, Tip, Science, Random, Funny, Trivia, Food, Cute"
         post_this(token, recipient, payload1)
         payload2 = "For music recommendation, type 'Music [name of artist]'"
         post_this(token, recipient, payload2)
@@ -98,27 +98,27 @@ def send_message(token, recipient, text):
         payload2 = payloader['title']
         post_this(token, recipient, payload2)
         
-    elif word_list.list4(text.decode('unicode_escape')) == True:
-        url = "https://api.themoviedb.org/3/movie/now_playing?api_key=dbc5a5e4384cceeced1c90779da712da&language=en-US&page=1"
-        data_res = "{}"
-        response = requests.request("GET", url, data=data_res)
-        top_mov = json.loads(response.text)
-        movlis = []
-        for movie in top_mov['results']:
-            title = movie['title']
-            overview = movie['overview']
-            poster = 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + movie['poster_path']
-            mov_id = str(movie['id'])
-            web_view = 'https://www.themoviedb.org/movie/' + mov_id
-            movdat = {
-                "title": title,
-                "overview": overview,
-                "poster": poster,
-                "movie_id": web_view
-            }
-            movlis.append(movdat)
-        payload = random.sample(movlis, 4)
-        template.movie_carousel(token, recipient, payload)
+   # elif word_list.list4(text.decode('unicode_escape')) == True:
+    #    url = "https://api.themoviedb.org/3/movie/now_playing?api_key=dbc5a5e4384cceeced1c90779da712da&language=en-US&page=1"
+    #    data_res = "{}"
+    #    response = requests.request("GET", url, data=data_res)
+    #    top_mov = json.loads(response.text)
+    #    movlis = []
+      #  for movie in top_mov['results']:
+      #      title = movie['title']
+     #   #    overview = movie['overview']
+       #     poster = 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + movie['poster_path']
+      #      mov_id = str(movie['id'])
+     #       web_view = 'https://www.themoviedb.org/movie/' + mov_id
+     #       movdat = {
+    #            "title": title,
+           #     "overview": overview,
+          #      "poster": poster,
+         #       "movie_id": web_view
+        #    }
+       #     movlis.append(movdat)
+      #  payload = random.sample(movlis, 4)
+     #   template.movie_carousel(token, recipient, payload)
 
     elif word_list.list5(text.decode('unicode_escape')) == True:
         trivia = []

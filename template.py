@@ -14,11 +14,6 @@ def quick_reps():
         },
         {
             "content_type":"text",
-            "title":"Movie",
-            "payload":"Movie"
-        },
-        {
-            "content_type":"text",
             "title":"Cute",
             "payload":"Cute"
         },
