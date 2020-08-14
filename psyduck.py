@@ -1,7 +1,7 @@
 
 from flask import Flask, request
 import json, praw, template, spotify_int, food
-import requests, random, word_list, weather
+import requests, random, word_list, wiki
 
 app = Flask(__name__)
 reddit = praw.Reddit(client_id='iGMNdhNR4e_Atg',
@@ -262,6 +262,18 @@ def send_message(token, recipient, text):
         part3 = "\nCholesterol: " + data[6] + "\nSugar: " + data[7] + "\nProtein: " + data[8] + "\nClaims: " + data2
         payload2 = "Nutrition Facts" + part1 + part2 + part3
         post_this(token, recipient, payload2)
+    
+    elif ("Search" or "search") in text.decode('unicode_escape'):
+        input = text.decode('unicode_escape')
+        output = input[7:]
+        payload = wiki.search(output)
+        post_this(token, recipient, payload)
+        
+    elif ("Wiki" or "wiki") in text.decode('unicode_escape'):
+        input = text.decode('unicode_escape')
+        output = input[5:]
+        payload = wiki.summary(output)
+        post_this(token, recipient, payload)
     
     else:
         r = requests.post("https://graph.facebook.com/v2.6/me/messages",
