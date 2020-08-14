@@ -240,13 +240,13 @@ def send_message(token, recipient, text):
     elif ("Search" or "search") in text.decode('unicode_escape'):
         input = text.decode('unicode_escape')
         output = input[7:]
-        payload = wiki.search(output)
+        payload = str(wiki.search(output))
         post_this(token, recipient, payload)
         
     elif ("Wiki" or "wiki") in text.decode('unicode_escape'):
         input = text.decode('unicode_escape')
         output = input[5:]
-        payload = wiki.summary(output)
+        payload = str(wiki.summary(output))
         post_this(token, recipient, payload)
     
     elif ("Food" or "food") in text.decode('unicode_escape'):
