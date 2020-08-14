@@ -246,7 +246,7 @@ def send_message(token, recipient, text):
     elif ("Wiki" or "wiki") in text.decode('unicode_escape'):
         input = text.decode('unicode_escape')
         output = input[5:]
-        payload = str(wiki.summary(output)[0])
+        payload = wiki.summary(output)[0]
         post_this(token, recipient, payload)
     
     elif ("Food" or "food") in text.decode('unicode_escape'):
