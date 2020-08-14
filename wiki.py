@@ -9,4 +9,5 @@ def search(query):
 def summary(query):
 	summary = wikipedia.summary(query)
 	
-	return summary
+	return [summary]
+	
