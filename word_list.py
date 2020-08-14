@@ -6,13 +6,13 @@ def list1(text):
         pass
 
 def list2(text):
-    if text in ['Help','help','More keywords']:
+    if text in ['Help','help','More keywords','keywords','Keywords']:
         return True
     else:
         pass
 
 def list3(text):
-    if text in ['Yummy','Suggest food','Recommend food','Food']:
+    if text in ['Yummy','Suggest food','Recommend food','Food','food']:
         return True
     else:
         pass
@@ -48,13 +48,13 @@ def list8(text):
         pass
 
 def list9(text):
-    if text in ['Aww','Cute','Cutie','Awww','aww','cute']:
+    if text in ['Aww','Cute','Cutie','Awww','aww','cute','awww']:
         return True
     else:
         pass
 
 def list10(text):
-    if text in ['Send pic','Pic pls','Pic']:
+    if text in ['Send pic','Pic pls','Pic','pic']:
         return True
     else:
         pass
@@ -78,7 +78,7 @@ def list13(text):
         pass
 
 def list14(text):
-    if text in ['Shower','Random']:
+    if text in ['Shower','Random','random','shower','More','more']:
         return True
     else:
         pass

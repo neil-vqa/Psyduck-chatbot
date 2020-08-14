@@ -9,6 +9,11 @@ def quick_reps():
         },
         {
             "content_type":"text",
+            "title":"Random",
+            "payload":"Random"
+        },
+        {
+            "content_type":"text",
             "title":"Food",
             "payload":"Food"
         },
