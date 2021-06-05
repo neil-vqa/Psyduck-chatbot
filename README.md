@@ -1,6 +1,6 @@
 # Psyduck-chatbot
 
-Website https://psyduckchatbot.wordpress.com/
+## NO LONGER WORKING DUE TO CHANGES IN FACEBOOK
 
 
 This chatbot was created to explore the basics of chatbot development. This is not a human-level intelligence chatbot.
