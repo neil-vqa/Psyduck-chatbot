@@ -1,6 +1,6 @@
-# Psyduck-chatbot
+# (DEPRECATED) Psyduck-chatbot
 
-## NO LONGER WORKING DUE TO CHANGES IN FACEBOOK
+## NO LONGER WORKING DUE TO CHANGES IN FACEBOOK. UPDATES WILL NOT BE MADE.
 
 
 This chatbot was created to explore the basics of chatbot development. This is not a human-level intelligence chatbot.
